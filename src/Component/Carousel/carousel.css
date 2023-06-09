@@ -1,0 +1,32 @@
+
+.carousel-item{
+    height: 60vh !important;
+
+    border-radius: 30px !important  ;
+}
+
+.carousel-inner{
+    position: relative;
+    border-radius: 30px !important ;
+}
+
+.carousel-item_info{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgb(27,45,67);
+    background: linear-gradient(49deg, rgba(27,45,67,1) 21%, rgba(9,15,121,0) 74%, rgba(0,212,255,0) 97%);
+    border-radius: 30px !important  ;
+}
+
+.carousel-item_info img {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 45% ;
+    border-radius: 30px !important  ;
+}

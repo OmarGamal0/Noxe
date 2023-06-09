@@ -1,13 +1,52 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+  /* @import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@300&family=Raleway:wght@300&display=swap'); */
+ 
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@300&family=Raleway:wght@300&display=swap');
+
+
+  body {
+     margin: 0;
+     font-family: 'Montserrat Alternates', sans-serif;
+     font-family: 'Raleway', sans-serif;
+     background-color:   #131722!important; 
+     color: #fff!important;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+a,a:hover{
+  color: #fff !important;
+  text-decoration: none!important;
 }
+.form-control{
+  background-color:transparent!important;
+  color: #fff!important;
+} 
+
+.noxe__section-background {
+  background-color: rgba(73, 169, 248, 0.149);
+  border-radius: 30px ;
+}
+
+.noxe_infoCard-line {
+  width: 20%;
+  height: 2px;
+  background-color: rgb(72, 169, 248);
+}
+
+.secondFontColor{
+  color: #949cb0b4;
+}
+
+.reatbox{
+  text-align: center;
+  height: 10%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgb(72, 169, 248);
+  border-bottom-left-radius: 20%;
+  border-bottom-right-radius: 20%;
+}
+.fa-star{
+  color: #f7d053;
+}
+

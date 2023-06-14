@@ -34,9 +34,7 @@ export default function (props) {
          return schema.validate(user , {abortEarly:false})
   }
   const [validationFormErrorList, setvalidationFormErrorList] = useState([]);
-
-
-
+  
   async function submitRegister(e) {
     setisloading(true);
     e.preventDefault() ; 

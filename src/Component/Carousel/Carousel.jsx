@@ -4,12 +4,12 @@ import { noxe, noxeActive } from '../../image'
 
 import './carousel.css'
 
-function Carosel() {
+function Carousel() {
 
   return ( 
- 
-    <div id="carouselExampleSlidesOnly" class="carousel slide pt-4 " data-bs-ride="carousel" >
-    <div class="carousel-inner">
+  
+    <div id="carouselExampleSlidesOnly" className="carousel slide pt-4 " data-bs-ride="carousel" >
+    <div className="carousel-inner">
     <CarouselImg />
     <div className='carousel-item_info'>
     <img src={noxe} alt="" />
@@ -20,7 +20,7 @@ function Carosel() {
   )
 }
 
-export default Carosel
+export default Carousel
 
 
 
@@ -32,8 +32,8 @@ let CarouselImg =()=>{
       <img className='d-block w-100 ' src={noxeActive} alt="" />
       </div>
         
-    {movies ? movies.map((movie)=><div className="carousel-item ">
-    <img className='d-block w-100' src={urlimg+movie.poster_path } alt="" />
+    {movies ? movies.map((movie ,index)=><div key={index} className="carousel-item ">
+    <img  className='d-block w-100' src={urlimg+movie.poster_path } alt="" />
     </div>
    ):<></>}
     </>)}

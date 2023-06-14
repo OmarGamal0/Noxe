@@ -13,7 +13,7 @@ function All() {
         {all.length >0 ? all.map((all ,index )=>
           <div key={index} className="col-md-2 my-2 position-relative ">
           <div className='reatbox shadow-lg d-flex align-items-center justify-content-center p-1'>
-           <i class="fa-solid fa-star fa-xs "></i>
+           <i className="fa-solid fa-star fa-xs "></i>
            <h5>{Math.floor(all.vote_average) }</h5>
           </div>
 

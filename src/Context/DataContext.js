@@ -15,7 +15,6 @@ export function DataContextProvidor(props)
  
   async function getTrendingMadie(date,madie,callback) {
   let {data} = await axios.get(`https://api.themoviedb.org/3/trending/${madie}/${date}?api_key=5dccbed72bef97f2ae76d727cb83071b`);
-  console.log(data.results,2);
   callback(data.results);
   }
 

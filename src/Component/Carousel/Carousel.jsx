@@ -30,8 +30,8 @@ let CarouselImg =()=>{
   const [moviesCarousel, setmoviesCarousel] = useState(null) ;
 
   useEffect(() => {
-    let moviesCarousel =[...movies]
-    setmoviesCarousel(moviesCarousel);
+    let moviesCopy =[...movies]
+    setmoviesCarousel(moviesCopy);
   
   }, [movies])
 

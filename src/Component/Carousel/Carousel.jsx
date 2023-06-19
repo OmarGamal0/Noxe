@@ -27,11 +27,12 @@ export default Carousel
 
 let CarouselImg =()=>{
   let{movies}=useContext(DataContext);
-  const [mo, setmo] = useState(null) ;
+  const [moviesCarousel, setmoviesCarousel] = useState(null) ;
 
   useEffect(() => {
-    let movie =[...movies]
-    setmo(movie);
+    let moviesCarousel =[...movies]
+    setmoviesCarousel(moviesCarousel);
+  
   }, [movies])
 
     return(<>
@@ -39,8 +40,8 @@ let CarouselImg =()=>{
       <img className='d-block w-100 ' src={noxeActive} alt="" />
       </div>
         
-    {mo ? mo.map((mo ,index)=><div key={index} className="carousel-item ">
-    <img  className='d-block w-100' src={urlimg+mo.poster_path } alt="" />
+    {moviesCarousel ? moviesCarousel.map((movie,index)=><div key={index} className="carousel-item ">
+    <img className='d-block w-100' src={urlimg+movie.poster_path } alt="" />
     </div>
    ):<></>}
     </>)}

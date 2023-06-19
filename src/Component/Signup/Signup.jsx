@@ -5,8 +5,9 @@ import Joi from 'joi';
 
 
 export default function Signup() {
-  let navigate = useNavigate();
+  localStorage.removeItem("userToken");
 
+  let navigate = useNavigate();
   const [isloading, setisloading] = useState(false)
   const [error, seterror] = useState('')
   const [user, setuser] = useState({
@@ -59,8 +60,7 @@ export default function Signup() {
     let validata = validationRigesterForm(user);
 
     if(validata.error)
-    {
-      setisloading(false);
+    {setisloading(false);
       setvalidationFormErrorList(validata.error.details);
     }else{
     try{
@@ -70,12 +70,8 @@ export default function Signup() {
         setisloading(false);
       }
     }
-
-// 3la4an al api lama ytba3tlo 7aga 8alt byrag3 error ma4 message erorr
     catch(error){ 
       seterror('Your mail is already registered');
-      // console.log('error else 2')
-      // console.log(error.message,'2')
       setisloading(false)
     }
   }  
@@ -125,3 +121,5 @@ export default function Signup() {
   </> 
   )
 }
+
+

@@ -10,10 +10,11 @@ function Carousel() {
   
     <div id="carouselExampleSlidesOnly" className="carousel slide pt-4 " data-bs-ride="carousel" >
     <div className="carousel-inner">
-    <CarouselImg />
+    
     <div className='carousel-item_info'>
     <img src={noxe} alt="" />
     </div>
+    <CarouselImg />
     </div>
     </div>
    

@@ -1,104 +1,85 @@
-import React, { useState } from 'react'
-import axios from "axios" 
-import { error } from 'jquery';
-import Joi from 'joi';
-import { useNavigate } from 'react-router';
+import React from 'react'
 
-export default function (props) {
-  
-  let navigate = useNavigate();
-  const [error, seterror] = useState('')
-  const [isloading, setisloading] = useState(false)
-  
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import Joi from 'joi'
 
-  const [user, setuser] = useState({
+function Login(props) {
+
+    const [errorList, seterrorList] = useState('');
+    const [loading, setloading] = useState(false);
+    const [apiError, setapiError] = useState('');
+    const [userDate, setuserDate] = useState({
       email : '' ,
-       password : '' , 
-  })
+      password : '' ,
+     })
+  
+    let navigate= useNavigate()
+  
 
-  function getUser (e) {
-    let myUser = {...user} ;
-    myUser[e.target.name] = e.target.value;
-    setuser(myUser);
+    function getUserData (e) {
+     let copyData = { ...userDate} ;
+     copyData[e.target.name] = e.target.value ;
+     setuserDate(copyData);
+    }
     
-  }
 
-  function validationloginForm (user) {
-    let schema = Joi.object({
-
-          email : Joi.string()
-          .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
-          password : Joi.string()
-          .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')), })
-
-         return schema.validate(user , {abortEarly:false})
-  }
-  const [validationFormErrorList, setvalidationFormErrorList] = useState([]);
+    function getValidation(userDate){
+      const schema = Joi.object({
+          password: Joi.string()
+              .pattern(new RegExp('^[a-zA-Z0-9\u0600-\u06FF\s]{3,30}$')),    
+          email: Joi.string()
+              .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+      })
+      return schema.validate(userDate, {abortEarly:false});
+    }
   
-  async function submitRegister(e) {
-    setisloading(true);
-    e.preventDefault() ; 
-
-    let validata = validationloginForm(user);
-
-    if(validata.error)
-    {setisloading(false);
-     setvalidationFormErrorList(validata.error.details);
-
-    }else{
+  
+  
+  async function submitRegister (e) {
+      e.preventDefault();
+      setloading(true);
+      let validation = getValidation(userDate);
+    
+     if(validation.error)
+     { setloading(false);
+       seterrorList(validation.error.details) ;
+     }else{
       try{
-      let respons = await axios.post(`https://registeration.vercel.app/user/signin`, user );
+        setloading(true);
+        let responseApi = await axios.post('https://registeration.vercel.app/user/signin', userDate);
 
-      if(respons.data.message === 'done'){
-        localStorage.setItem('userToken',respons.data.token )
-
-       props.getUserData();
-        setisloading(false);
-        navigate('/home');
-      }
-
-    }catch(error){ 
-      seterror(`Make sure you are registered or Verify the password `);
-      setisloading(false)
-    }}
-  
-  }
-
-  return (<>
-  <div >
-
-  <form onSubmit={submitRegister}  >
-
-    <h2 className='my-3'>logIn</h2>
-    <h5 className='fs-6 secondFontColor mb-3'> you should go to sign up first </h5>
-    {validationFormErrorList.map((error,index)=> {
-      if(index == 4)
-      {
-        return <div key={index} className="alert alert-danger ">password not validation</div>
-      }
-      else{
-      return <div key={index} className="alert alert-danger ">{error.message}</div>
+        if(responseApi.data.message === 'done'){
+          localStorage.setItem('userToken',responseApi.data.token);
+          props.getUserToken();
+            navigate('/home')
+           }
+           
+      }catch(error){
+        setapiError('your email or password was incorrect');
+        setloading(false);
       }
     }
-     )}
+  }
+  
+  
+    return (
+      <form onSubmit={submitRegister}>
+        <h2>Log IN</h2>
+        {errorList? errorList.map((error,index)=><div key={index} className='alert alert-danger'>{error.message}</div>):''} 
+        {apiError?<div className='alert alert-danger'>{apiError}</div>:''}
 
-    {error?<div className=' alert alert-danger '>{error}</div>:''}
+          <label htmlFor="email">Email</label>
+          <input onChange={getUserData} className='form-control my-2' type="email" name='email' />
+  
+          <label htmlFor="password">Password</label>
+          <input onChange={getUserData} className='form-control my-2' type="password" name='password' />
 
-    <label htmlFor="email">Email :</label>
-    <input onChange={getUser} type="email"name='email'id='email' className='form-control my-3 '/>
-
-    <label htmlFor="password">Password :</label>
-    <input onChange={getUser} type="password"name='password'id='password'className='form-control my-3 ' />
-    
-    <button className='btn btn-success '>   
-    {isloading?<i className='fas fa-spinner fa-spin px-1 '></i>:'LogIn'}
-    </button>
-
-  </form>
-
-  </div>
- 
-  </>
-    
-  )
-}
+          {loading == false?<button  className='btn btn-outline-info mt-3'>Log in</button>
+          :<button className='btn btn-outline-info mt-3 spinner-border '></button>}
+      </form>
+    )
+  }
+  
+  export default Login
